@@ -1,40 +1,67 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"; // Import Router, Switch, and Route
 import * as Components from "./Components";
-import Forum from "./home";
+import "./styles.css";
+import backgroundVideo from "./video.mp4"; // Adjust the path to your video file
 
 function App() {
   const [signIn, toggle] = useState(true);
 
   return (
-    <Router>
+    <div className="background-video">
+      <video autoPlay loop muted>
+        <source src={backgroundVideo} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
       <div className={`App ${signIn ? "signin" : "signup"}`}>
-        <video autoPlay loop muted className="background-video">
-          <source src="/background-video.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
         <Components.Container>
           {signIn ? (
             <Components.SignInContainer signinIn={signIn}>
-              {/* Rest of your Sign In component */}
+              <Components.Form>
+                <Components.Title>Sign in</Components.Title>
+                <Components.Input type="email" placeholder="Email" />
+                <Components.Input type="password" placeholder="Password" />
+                <Components.Anchor href="#">
+                  Forgot your password?
+                </Components.Anchor>
+                <Components.Button>Sign In</Components.Button>
+              </Components.Form>
             </Components.SignInContainer>
           ) : (
             <Components.SignUpContainer signinIn={signIn}>
-              {/* Rest of your Sign Up component */}
+              <Components.Form>
+                <Components.Title>Create Account</Components.Title>
+                <Components.Input type="text" placeholder="Name" />
+                <Components.Input type="email" placeholder="Email" />
+                <Components.Input type="password" placeholder="Password" />
+                <Components.Button>Sign Up</Components.Button>
+              </Components.Form>
             </Components.SignUpContainer>
           )}
           <Components.OverlayContainer signinIn={signIn}>
-            {/* Rest of your Overlay component */}
+            <Components.Overlay signinIn={signIn}>
+              <Components.LeftOverlayPanel signinIn={signIn}>
+                <Components.Title>Welcome Back!</Components.Title>
+                <Components.Paragraph>
+                  To keep connected with us please login with your personal info
+                </Components.Paragraph>
+                <Components.GhostButton onClick={() => toggle(true)}>
+                  Sign In
+                </Components.GhostButton>
+              </Components.LeftOverlayPanel>
+              <Components.RightOverlayPanel signinIn={signIn}>
+                <Components.Title>Hello, Friend!</Components.Title>
+                <Components.Paragraph>
+                  Enter Your personal details and start journey with us
+                </Components.Paragraph>
+                <Components.GhostButton onClick={() => toggle(false)}>
+                  Sign Up
+                </Components.GhostButton>
+              </Components.RightOverlayPanel>
+            </Components.Overlay>
           </Components.OverlayContainer>
         </Components.Container>
-
-        <Switch>
-          <Route path="/home">
-            <Forum />
-          </Route>
-        </Switch>
       </div>
-    </Router>
+    </div>
   );
 }
 
