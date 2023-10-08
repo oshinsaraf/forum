@@ -49,9 +49,9 @@ function App() {
                 </Components.GhostButton>
               </Components.LeftOverlayPanel>
               <Components.RightOverlayPanel signinIn={signIn}>
-                <Components.Title>Hello, Friend!</Components.Title>
+                <Components.Title>Hello there!</Components.Title>
                 <Components.Paragraph>
-                  Enter Your personal details and start journey with us
+                  Enter Your personal details and start your journey with us
                 </Components.Paragraph>
                 <Components.GhostButton onClick={() => toggle(false)}>
                   Sign Up
